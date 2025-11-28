@@ -60,7 +60,7 @@ void CalculateDialog::on_calculateButton_clicked()
         QString valStr = ui->tableWidget->item(i, 1)->text();
 
         bool ok;
-        int value = valStr.toInt(&ok);
+        double value = valStr.toDouble(&ok);
 
         if (ok) {
             expression.setVarValue(key, value);

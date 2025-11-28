@@ -64,7 +64,7 @@ public:
     bool existVar = false;
     Node* root = nullptr;
     QString prefix;
-    std::unordered_map<char,int> varMap;
+    std::unordered_map<char,double> varMap;
 public:
     Expr() = default;
 
@@ -79,7 +79,7 @@ public:
 
     QString toTree() const;
 
-    void setVarValue(char c,int v);
+    void setVarValue(char c,double v);
 
     double value();
 

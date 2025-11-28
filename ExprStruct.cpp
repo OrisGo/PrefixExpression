@@ -85,7 +85,7 @@ QString Expr::toInfix() const
 }
 
 
-void Expr::setVarValue(char c,int v){
+void Expr::setVarValue(char c,double v){
     varMap[c] = v;
 }
 

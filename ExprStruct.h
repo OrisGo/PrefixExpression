@@ -77,6 +77,8 @@ public:
 
     QString toInfix() const;
 
+    QString toTree() const;
+
     void setVarValue(char c,int v);
 
     double value();
@@ -84,7 +86,7 @@ public:
 private:
     QString toInfix(Node* root) const;
 
-
+    void generateTreeString(Node* root, QString pre, bool isTail, QString &str) const;
     double evaluate(Node* root);
 
 public:

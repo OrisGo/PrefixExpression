@@ -3,7 +3,7 @@
 
 #include "inputwidget.h"
 #include "showwidget.h"
-#include "evaluatewidget.h"
+#include "calculatewidget.h"
 #include "compoundwidget.h"
 #include <QFileDialog>
 #include <QFile>
@@ -131,14 +131,14 @@ void Expression::on_showButton_clicked()
 
 void Expression::on_evaluateButton_clicked()
 {
-    EvaluateWidget *evaluate = new EvaluateWidget(expressions);
+    CalculateWidget *evaluate = new CalculateWidget(expressions);
 
     evaluate->setAttribute(Qt::WA_DeleteOnClose);
 
     this->hide();
     evaluate->show();
 
-    connect(evaluate,&EvaluateWidget::destroyed,[=]{
+    connect(evaluate,&CalculateWidget::destroyed,[=]{
         this->show();
     });
 }

@@ -11,6 +11,8 @@ ShowDialog::ShowDialog(Expr& e,QWidget *parent)
     ui->prefixLine->setText(e.prefix);
 
     ui->infixText->setText(e.toInfix());
+
+    ui->treeText->setText(e.toTree());
 }
 
 ShowDialog::~ShowDialog()

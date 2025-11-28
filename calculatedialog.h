@@ -1,5 +1,5 @@
-#ifndef EVALUATEDIALOG_H
-#define EVALUATEDIALOG_H
+#ifndef CALCULATEDIALOG_H
+#define CALCULATEDIALOG_H
 
 #include <QDialog>
 #include "ExprStruct.h"
@@ -7,13 +7,13 @@ namespace Ui {
 class EvaluateDialog;
 }
 
-class EvaluateDialog : public QDialog
+class CalculateDialog : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit EvaluateDialog(const Expr& e,QWidget *parent = nullptr);
-    ~EvaluateDialog();
+    explicit CalculateDialog(const Expr& e,QWidget *parent = nullptr);
+    ~CalculateDialog();
 
 private slots:
     void on_calculateButton_clicked();
@@ -28,4 +28,4 @@ private:
     void initTable();
 };
 
-#endif // EVALUATEDIALOG_H
+#endif // CALCULATEDIALOG_H

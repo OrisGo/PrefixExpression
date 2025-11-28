@@ -1,8 +1,8 @@
-#include "evaluatewidget.h"
-#include "ui_evaluatewidget.h"
+#include "calculatewidget.h"
+#include "ui_calculatewidget.h"
 
-#include "evaluatedialog.h"
-EvaluateWidget::EvaluateWidget(std::vector<Expr>& vec,QWidget *parent)
+#include "calculatedialog.h"
+CalculateWidget::CalculateWidget(std::vector<Expr>& vec,QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::EvaluateWidget)
 {
@@ -23,7 +23,7 @@ EvaluateWidget::EvaluateWidget(std::vector<Expr>& vec,QWidget *parent)
 
                     Expr& targetExpr = expressions[row];
 
-                    EvaluateDialog *dlg = new EvaluateDialog(targetExpr, this);
+                    CalculateDialog *dlg = new CalculateDialog(targetExpr, this);
 
                     dlg->setAttribute(Qt::WA_DeleteOnClose);
 
@@ -32,7 +32,7 @@ EvaluateWidget::EvaluateWidget(std::vector<Expr>& vec,QWidget *parent)
             });
 }
 
-EvaluateWidget::~EvaluateWidget()
+CalculateWidget::~CalculateWidget()
 {
     delete ui;
 }

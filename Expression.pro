@@ -10,9 +10,9 @@ CONFIG += c++17
 
 SOURCES += \
     ExprStruct.cpp \
+    calculatedialog.cpp \
+    calculatewidget.cpp \
     compoundwidget.cpp \
-    evaluatedialog.cpp \
-    evaluatewidget.cpp \
     inputwidget.cpp \
     main.cpp \
     expression.cpp \
@@ -21,18 +21,18 @@ SOURCES += \
 
 HEADERS += \
     ExprStruct.h \
+    calculatedialog.h \
+    calculatewidget.h \
     compoundwidget.h \
-    evaluatedialog.h \
-    evaluatewidget.h \
     expression.h \
     inputwidget.h \
     showdialog.h \
     showwidget.h
 
 FORMS += \
+    calculatewidget.ui \
     compoundwidget.ui \
     evaluatedialog.ui \
-    evaluatewidget.ui \
     expression.ui \
     inputwidget.ui \
     showdialog.ui \

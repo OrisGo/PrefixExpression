@@ -1,26 +1,26 @@
-#include "evaluatedialog.h"
+#include "calculatedialog.h"
 #include "ui_evaluatedialog.h"
 #include <QMessageBox>
 
 
-EvaluateDialog::EvaluateDialog(const Expr& e,QWidget *parent)
+CalculateDialog::CalculateDialog(const Expr& e,QWidget *parent)
     : QDialog(parent)
     , ui(new Ui::EvaluateDialog)
 {
     ui->setupUi(this);
     expression = e;
 
-    ui->lineEdit->setText(e.prefix);
+    ui->lineEdit->setText(e.toInfix());
 
     initTable();
 }
 
-EvaluateDialog::~EvaluateDialog()
+CalculateDialog::~CalculateDialog()
 {
     delete ui;
 }
 
-void EvaluateDialog::initTable()
+void CalculateDialog::initTable()
 {
     ui->tableWidget->setRowCount(0);
 
@@ -47,7 +47,7 @@ void EvaluateDialog::initTable()
     }
 }
 
-void EvaluateDialog::on_calculateButton_clicked()
+void CalculateDialog::on_calculateButton_clicked()
 {
     int rows = ui->tableWidget->rowCount();
     bool allOk = true;
@@ -64,6 +64,7 @@ void EvaluateDialog::on_calculateButton_clicked()
 
         if (ok) {
             expression.setVarValue(key, value);
+            ui->tableWidget->item(i, 1)->setBackground(Qt::transparent);
         } else {
             allOk = false;
             ui->tableWidget->item(i, 1)->setBackground(QColor(255, 200, 200));
@@ -74,7 +75,6 @@ void EvaluateDialog::on_calculateButton_clicked()
         QMessageBox::warning(this, "输入错误", "表格中包含非法的数字格式，请检查！");
         return;
     }
-
     double result = expression.value();
 
     ui->lineEdit->clear();
@@ -84,13 +84,13 @@ void EvaluateDialog::on_calculateButton_clicked()
 }
 
 
-void EvaluateDialog::on_resetButton_clicked()
+void CalculateDialog::on_resetButton_clicked()
 {
     ui->label->clear();
     ui->label->setText("前缀表达式：");
 
     ui->lineEdit->clear();
-    ui->lineEdit->setText(expression.prefix);
+    ui->lineEdit->setText(expression.toInfix());
 
     int rows = ui->tableWidget->rowCount();
     for(int i = 0; i < rows; ++i)

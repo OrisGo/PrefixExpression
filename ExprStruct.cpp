@@ -111,17 +111,16 @@ QString Expr::toInfix(Node* root) const
     int P_parent = priority.at(root->c);
 
 
-    // === 左子树加括号判断 ===
+    // 左子树加括号判断
     bool leftBracket = false;
     if (!root->left->isOperand)
     {
         int P_left = priority.at(root->left->c);
 
-        // 条件1: 父节点优先级高于左子节点优先级
         if (P_parent > P_left) {
             leftBracket = true;
         }
-        // 条件2: 父节点和左子节点优先级相等，且是右结合运算符 (^)
+
         else if (P_parent == P_left && root->c == '^') {
             leftBracket = true;
         }
@@ -135,18 +134,16 @@ QString Expr::toInfix(Node* root) const
     // 插入父节点运算符
     ans += root->c;
 
-    // === 右子树加括号判断 ===
+    // 右子树加括号判断
     bool rightBracket = false;
     if (!root->right->isOperand)
     {
         int P_right = priority.at(root->right->c);
 
-        // 条件1: 父节点优先级高于右子节点优先级
         if (P_parent > P_right) {
             rightBracket = true;
         }
-        // 条件2: 父节点和右子节点优先级相等，且是左结合运算符 (+, -, *, /)
-        // 排除右结合运算符 (^)
+
         else if (P_parent == P_right && root->c != '^') {
             rightBracket = true;
         }
@@ -297,7 +294,7 @@ Expr createExpr(QString prefix)
         } else {
             Node* newNode = new Node(c,false);
 
-            if(newNode->existVar)
+            if('a' <= c && c <= 'z')
             {
                 ans.varMap[c] = 0;
                 ans.existVar = true;
@@ -353,4 +350,52 @@ Expr compoundExpr(char P, const Expr& e1,const Expr& e2)
     ans.prefix = QString(P) + e1.prefix + e2.prefix;
     return ans;
 
+}
+
+QString Expr::toTree() const
+{
+    if(!root) return "";
+    QString ret = "";
+
+    generateTreeString(root, "",true, ret);
+
+    return ret;
+}
+
+
+void Expr::generateTreeString(Node* root,QString pre, bool isTail, QString &str) const
+{
+    if(!root) return;
+
+    QString nodeText;
+
+    if(!root->isOperand)
+    {
+        nodeText = QString("Operator: %1").arg(root->c);
+    }
+    else
+    {
+        nodeText = QString("Operand: %1").arg(root->c);
+    }
+
+    str += pre;
+
+    if (isTail) {
+        str += "└── ";  // 最后一个分支（通常是右孩子，或者独生子）
+        pre += "    "; // 下一层的缩进为空白
+    } else {
+        str += "├── ";  // 中间分支（通常是左孩子）
+        pre += "│   "; // 下一层的缩进带竖线
+    }
+    str += nodeText + "\n";
+
+
+    if (root->left && root->right) {
+        generateTreeString(root->left, pre, false, str);
+        generateTreeString(root->right, pre, true, str);
+    } else if (root->left) {
+        generateTreeString(root->left, pre, true, str);
+    } else if (root->right) {
+        generateTreeString(root->right, pre, true, str);
+    }
 }

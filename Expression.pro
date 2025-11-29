@@ -30,9 +30,9 @@ HEADERS += \
     showwidget.h
 
 FORMS += \
+    calculatedialog.ui \
     calculatewidget.ui \
     compoundwidget.ui \
-    evaluatedialog.ui \
     expression.ui \
     inputwidget.ui \
     showdialog.ui \

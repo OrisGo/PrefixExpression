@@ -1,5 +1,5 @@
 #include "calculatedialog.h"
-#include "ui_evaluatedialog.h"
+#include "ui_calculatedialog.h"
 #include <QMessageBox>
 
 
@@ -87,7 +87,7 @@ void CalculateDialog::on_calculateButton_clicked()
 void CalculateDialog::on_resetButton_clicked()
 {
     ui->label->clear();
-    ui->label->setText("前缀表达式：");
+    ui->label->setText("中缀表达式：");
 
     ui->lineEdit->clear();
     ui->lineEdit->setText(expression.toInfix());

@@ -381,10 +381,10 @@ void Expr::generateTreeString(Node* root,QString pre, bool isTail, QString &str)
     str += pre;
 
     if (isTail) {
-        str += "└── ";  // 最后一个分支（通常是右孩子，或者独生子）
-        pre += "    "; // 下一层的缩进为空白
+        str += "└── ";  // 右孩子，或者独生子
+        pre += "    ";
     } else {
-        str += "├── ";  // 中间分支（通常是左孩子）
+        str += "├── ";  // 左孩子
         pre += "│   "; // 下一层的缩进带竖线
     }
     str += nodeText + "\n";

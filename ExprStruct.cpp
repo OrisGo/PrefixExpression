@@ -2,7 +2,7 @@
 #include <stack>
 #include <stdexcept>
 
-double evaluate(char P, double val1, double val2)
+double calculate(char P, double val1, double val2)
 {
     double ans = 0;
     switch(P)
@@ -92,7 +92,7 @@ void Expr::setVarValue(char c,double v){
 
 double Expr::value()
 {
-    return evaluate(root);
+    return calculate(root);
 }
 
 
@@ -158,7 +158,7 @@ QString Expr::toInfix(Node* root) const
 }
 
 
-double Expr::evaluate(Node* root)
+double Expr::calculate(Node* root)
 {
     if(root->isOperand)
     {
@@ -166,14 +166,14 @@ double Expr::evaluate(Node* root)
         return root->val;
     }
 
-    double left = this->evaluate(root->left);
-    double right = this->evaluate(root->right);
+    double left = this->calculate(root->left);
+    double right = this->calculate(root->right);
 
     char c = root->c;
 
     if(c == '/' && right == 0) throw std::runtime_error("除数出现0，请检查表达式");
 
-    double ans = ::evaluate(c,left,right);
+    double ans = ::calculate(c,left,right);
 
     return ans;
 }
@@ -222,7 +222,7 @@ bool validPrefix(QString s)
 
             if(!leftVar && !rightVar)
             {
-                res = evaluate(c,left,right);
+                res = calculate(c,left,right);
             }
             stk.push(res);
 
@@ -285,7 +285,7 @@ Expr createExpr(QString prefix)
             newNode->existVar = leftNode->existVar || rightNode->existVar;
 
             if (!newNode->existVar) {
-                newNode->val = evaluate(c, leftNode->val, rightNode->val);
+                newNode->val = calculate(c, leftNode->val, rightNode->val);
             } else {
                 ans.existVar = true;
             }
@@ -341,7 +341,7 @@ Expr compoundExpr(char P, const Expr& e1,const Expr& e2)
 
     if(!ans.existVar)
     {
-        ans.root->val = evaluate(P,e1.root->val,e2.root->val);
+        ans.root->val = calculate(P,e1.root->val,e2.root->val);
     }
     else
     {

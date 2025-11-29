@@ -17,7 +17,7 @@
    <item>
     <widget class="QLabel" name="label">
      <property name="text">
-      <string>前缀表达式：</string>
+      <string>中缀表达式：</string>
      </property>
     </widget>
    </item>

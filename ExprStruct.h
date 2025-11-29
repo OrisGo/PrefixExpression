@@ -16,7 +16,7 @@ inline bool isOperator(char c)
 }
 
 
-double evaluate(char P, double val1, double val2);
+double calculate(char P, double val1, double val2);
 
 struct Node
 {
@@ -87,7 +87,7 @@ private:
     QString toInfix(Node* root) const;
 
     void generateTreeString(Node* root, QString pre, bool isTail, QString &str) const;
-    double evaluate(Node* root);
+    double calculate(Node* root);
 
 public:
     Node* clone(const Node* other);
